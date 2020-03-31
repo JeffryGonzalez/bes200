@@ -22,9 +22,9 @@ namespace LibraryApi.Models
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            if(Title.ToLower() == "it" && Author.ToLower() == "king")
+            if(Title.ToLower() == "the stand" && Author.ToLower() == "king")
             {
-                yield return new ValidationResult("That book is inappropriate for school",
+                yield return new ValidationResult("That book is in bad taste during a pandemic",
                     new string[] { "Title", "Author" });
             }
         }
