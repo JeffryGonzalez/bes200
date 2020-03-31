@@ -30,12 +30,12 @@ namespace LibraryApiIntegrationTests
                 {
                     services.Remove(descriptor);
                 }
-                //if(employeeIdGeneratorDescriptor != null)
-                //{
-                //    services.Remove(employeeIdGeneratorDescriptor);
-                //}
+                if (employeeIdGeneratorDescriptor != null)
+                {
+                    services.Remove(employeeIdGeneratorDescriptor);
+                }
 
-                //services.AddTransient<IGenerateEmployeeIds, TestingEmployeeIdGenerator>();
+                services.AddTransient<IGenerateEmployeeIds, TestingEmployeeIdGenerator>();
                 // Add ApplicationDbContext using an in-memory database for testing.
                 services.AddDbContext<LibraryDataContext>(options =>
                 {
