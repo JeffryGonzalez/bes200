@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace LibraryApi.Controllers
@@ -13,16 +14,18 @@ namespace LibraryApi.Controllers
     public class BooksController : Controller
     {
         LibraryDataContext Context;
+        HttpClient Client;
 
-        public BooksController(LibraryDataContext context)
+        public BooksController(LibraryDataContext context, IHttpClientFactory clientFactory)
         {
             Context = context;
+            Client = clientFactory.CreateClient();
         }
-
 
         [HttpPut("books/{id:int}/numberofpages")]
         public async Task<ActionResult> UpdateNumberOfPages(int id, [FromBody] int newPages)
         {
+            
             var book = await GetBooksInInventory()
                 .Where(b => b.Id == id)
                 .SingleOrDefaultAsync();
