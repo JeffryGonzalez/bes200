@@ -17,6 +17,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using RabbitMqUtils;
 
 namespace LibraryApi
 {
@@ -32,6 +33,9 @@ namespace LibraryApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.AddRabbit(Configuration);
+            services.AddTransient<IWriteToTheReservationQueue, RabbitMqReservationProcessor>();
             services.AddTransient<ILookupOnCallDevelopers, MicrosoftTeamsOnCallDeveloperLookup>();
             services.AddTransient<IGenerateEmployeeIds, EmployeeIdGenerator>();
             services.AddControllers()
